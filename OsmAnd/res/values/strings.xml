@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="import_track_descr">Choose track file to follow or import it from device.</string>
+    <string name="follow_track_descr">Choose track file to follow</string>
+    <string name="follow_track">Follow track</string>
     <string name="overwrite_track">Overwrite track</string>
     <string name="shared_string_done">Done</string>
     <string name="plan_route_select_track_file_for_open">Select a track file for open.</string>
