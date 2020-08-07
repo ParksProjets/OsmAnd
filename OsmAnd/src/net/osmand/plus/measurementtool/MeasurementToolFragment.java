@@ -90,7 +90,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.GpxApproximationFragment.*;
+import static net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
@@ -469,7 +469,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 
 		initMeasurementMode(newGpxData);
 
-		if (planRouteMode && savedInstanceState == null) {
+		if (editingCtx.isNewData() && planRouteMode && savedInstanceState == null) {
 			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 					createStartPlanRouteListener());
 		}
@@ -1841,6 +1841,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setInitialPoint(initialPoint);
+		return showFragment(fragment, fragmentManager);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setEditingCtx(editingCtx);
+		fragment.setPlanRouteMode(planRoute);
 		return showFragment(fragment, fragmentManager);
 	}
 
