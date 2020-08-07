@@ -74,8 +74,8 @@ import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -885,11 +885,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 
 	public void addNewGpxData(GPXFile gpxFile) {
 		QuadRect rect = gpxFile.getRect();
-		TrkSegment segment = getTrkSegment(gpxFile);
-		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, segment == null
-				? ActionType.ADD_ROUTE_POINTS
-				: ActionType.EDIT_SEGMENT,
-				segment);
+		TrkSegment segment = gpxFile.getTrkSegment();
+		ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
+
 		editingCtx.setNewGpxData(newGpxData);
 		initMeasurementMode(newGpxData);
 		QuadRect qr = newGpxData.getRect();
@@ -898,17 +897,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 			mapActivity.getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom,
 					(int) qr.width(), (int) qr.height(), 0);
 		}
-	}
-
-	private TrkSegment getTrkSegment(GPXFile gpxFile) {
-		for (GPXUtilities.Track t : gpxFile.tracks) {
-			for (TrkSegment s : t.segments) {
-				if (s.points.size() > 0) {
-					return s;
-				}
-			}
-		}
-		return null;
 	}
 
 	private void removePoint(MeasurementToolLayer layer, int position) {
@@ -1202,7 +1190,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		AndroidUiHelper.setVisibility(mapActivity,enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		if (!enable) {
