@@ -411,7 +411,7 @@
 	<dimen name="coords_input_show_hide_keyboard_btn_padding">13dp</dimen>
 	<dimen name="coords_input_keyboard_item_height">56dp</dimen>
 
-	<dimen name="toolbar_height">46dp</dimen>
+	<dimen name="toolbar_height">30dp</dimen>
 	<dimen name="toolbar_height_expanded">96dp</dimen>
 	<dimen name="toolbar_height_expanded_large">112dp</dimen>
 	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>

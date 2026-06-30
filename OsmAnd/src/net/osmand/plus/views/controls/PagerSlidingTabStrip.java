@@ -133,7 +133,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	@ColorInt
 	private int dividerColor;
 
-	private int tabPadding = 12;
+	private int horizontalPadding;
+	private int tabPadding = 18;
 	private int tabTextSize = 14;
 	@ColorInt
 	private int tabTextColor;
@@ -187,6 +188,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tabPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, tabPadding, dm);
 		dividerWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dividerWidth, dm);
 		tabTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, tabTextSize, dm);
+
+		horizontalPadding = dm.widthPixels / 6;
 
 		// get system attrs (android:textSize and android:textColor)
 		TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
@@ -351,7 +354,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				if (tabBackgroundResId != 0) {
 					v.setBackgroundResource(tabBackgroundResId);
 				}
-				v.setPadding(tabPadding, v.getPaddingTop(), tabPadding, v.getPaddingBottom());
+
+				int leftPadding = tabPadding + ((i == 0) ? horizontalPadding : 0);
+				int rightPadding = tabPadding + ((i == (tabCount - 1)) ? horizontalPadding : 0);
+				v.setPadding(leftPadding, v.getPaddingTop(), rightPadding, v.getPaddingBottom());
 
 				TextView tabTitle = v.findViewById(R.id.tab_title);
 				if (tabTitle != null) {

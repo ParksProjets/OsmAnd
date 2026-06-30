@@ -20,7 +20,7 @@
 			<net.osmand.plus.views.controls.PagerSlidingTabStrip
 				android:id="@+id/sliding_tabs"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/list_item_height"
+				android:layout_height="30dp"
 				android:background="?attr/colorPrimary" />
 
 		</FrameLayout>
