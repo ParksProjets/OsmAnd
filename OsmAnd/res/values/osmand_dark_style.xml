@@ -46,6 +46,10 @@
 
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
+        <!-- Hide window bar to save some space on top. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <item name="alert_dialog_theme">@style/OsmandDarkTheme</item>
         <item name="bottom_bar_background_color">@color/card_and_list_background_dark</item>
         <item name="android:textDirection">locale</item>
