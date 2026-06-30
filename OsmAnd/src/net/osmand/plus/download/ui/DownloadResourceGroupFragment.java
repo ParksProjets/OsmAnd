@@ -131,7 +131,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		listView = view.findViewById(R.id.category_list);
 		addSubscribeEmailRow();
 		addSearchRow();
-		addRestorePurchasesRow();
 		addDescriptionRow();
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);

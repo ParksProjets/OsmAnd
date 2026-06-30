@@ -413,7 +413,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public LocationServiceHelper createLocationServiceHelper() {
 		LocationSource source = settings.LOCATION_SOURCE.get();
 		if (source == LocationSource.GOOGLE_PLAY_SERVICES) {
-			return new GmsLocationServiceHelper(this);
+			return new AndroidApiLocationServiceHelper(this);
 		}
 		return Version.isHMDBuild() ? new HMDLocationServiceHelper(this) : new AndroidApiLocationServiceHelper(this);
 	}

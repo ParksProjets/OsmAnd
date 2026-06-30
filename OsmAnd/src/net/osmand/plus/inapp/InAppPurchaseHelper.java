@@ -189,36 +189,37 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public InAppSubscriptionList getSubscriptions() {
-		return purchases.getSubscriptions();
+		return new InAppSubscriptionList(new InAppSubscription[] {}) {};
 	}
 
 	@Nullable
 	public InAppPurchase getFullVersion() {
-		return purchases.getFullVersion();
+		return null;
 	}
 
 	@Nullable
 	public InAppPurchase getDepthContours() {
-		return purchases.getDepthContours();
+		return null;
 	}
 
 	@Nullable
 	public InAppPurchase getContourLines() {
-		return purchases.getContourLines();
+		return null;
 	}
 
+	@Nullable
 	public InAppSubscription getMonthlySubscription() {
-		return purchases.getMonthlySubscription();
+		return null;
 	}
 
 	@Nullable
 	public InAppSubscription getPurchasedMonthlySubscription() {
-		return purchases.getPurchasedMonthlySubscription();
+		return null;
 	}
 
 	@Nullable
 	public InAppSubscription getAnyPurchasedOsmAndProSubscription() {
-		return purchases.getAnyPurchasedOsmAndProSubscription();
+		return null;
 	}
 
 	public abstract boolean isPurchasedLocalFullVersion();

@@ -94,6 +94,7 @@
 
 	<Preference
 		android:key="location_source"
+		app:isPreferenceVisible="false"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/location_source"

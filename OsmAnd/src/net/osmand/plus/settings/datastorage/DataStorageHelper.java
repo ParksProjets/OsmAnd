@@ -83,17 +83,6 @@ public class DataStorageHelper {
 				.createItem();
 		addItem(internalStorageItem);
 
-		//shared storage
-		StorageItem sharedStorageItem = StorageItem.builder()
-				.setKey(SHARED_STORAGE)
-				.setTitle(app.getString(R.string.storage_directory_shared))
-				.setDirectory(settings.getDefaultInternalStorage().getAbsolutePath())
-				.setDescription(app.getString(R.string.shared_app_storage_description))
-				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-				.setIconResId(R.drawable.ic_action_device_alert)
-				.createItem();
-		addItem(sharedStorageItem);
-
 		//external storage
 		File[] externals = app.getExternalFilesDirs(null);
 		if (externals != null) {
