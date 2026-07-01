@@ -957,16 +957,28 @@ public class OsmandApplication extends MultiDexApplication {
 		getResourceManager().resetStoreDirectory();
 	}
 
-	public void applyTheme(@NonNull Context context) {
+	public void applyTheme(@NonNull Context context, boolean noSwipeDismiss) {
 		int themeId;
 		boolean noAnimation = settings.DO_NOT_USE_ANIMATIONS.get();
-		if (!settings.isLightContent()) {
-			themeId = noAnimation ? R.style.OsmandDarkTheme_NoAnimation : R.style.OsmandDarkTheme;
+		if (noSwipeDismiss) {
+			if (!settings.isLightContent()) {
+				themeId = noAnimation ? R.style.OsmandDarkTheme_NoAnimation_NoSwipeDismiss : R.style.OsmandDarkTheme_NoSwipeDismiss;
+			} else {
+				themeId = noAnimation ? R.style.OsmandLightTheme_NoAnimation_NoSwipeDismiss : R.style.OsmandLightTheme_NoSwipeDismiss;
+			}
 		} else {
-			themeId = noAnimation ? R.style.OsmandLightTheme_NoAnimation : R.style.OsmandLightTheme;
+			if (!settings.isLightContent()) {
+				themeId = noAnimation ? R.style.OsmandDarkTheme_NoAnimation : R.style.OsmandDarkTheme;
+			} else {
+				themeId = noAnimation ? R.style.OsmandLightTheme_NoAnimation : R.style.OsmandLightTheme;
+			}
 		}
 		localeHelper.setLanguage(context);
 		context.setTheme(themeId);
+	}
+
+	public void applyTheme(@NonNull Context context) {
+		applyTheme(context, false);
 	}
 
 	@Nullable

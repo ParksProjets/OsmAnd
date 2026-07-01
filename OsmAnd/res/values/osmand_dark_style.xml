@@ -43,7 +43,13 @@
         <item name="dialog_title_color">@color/marker_red</item>
     </style>
 
+    <style name="OsmandDarkTheme.NoSwipeDismiss">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
 
+    <style name="OsmandDarkTheme.NoAnimation.NoSwipeDismiss">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
         <!-- Hide window bar to save some space on top. -->
