@@ -93,6 +93,12 @@ public class MapViewWithLayers extends FrameLayout {
 		AndroidUiHelper.updateVisibility(mapLayersView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(atlasMapRendererView, !useAndroidAuto && useOpenglRender);
 		AndroidUiHelper.updateVisibility(androidAutoPlaceholder, useAndroidAuto);
+
+		// Should be done after view have been made visible.
+		if (!useOpenglRender)
+			surfaceView.requestFocus();
+		else
+			mapLayersView.requestFocus();
 	}
 
 	private void resetMapRendererView() {

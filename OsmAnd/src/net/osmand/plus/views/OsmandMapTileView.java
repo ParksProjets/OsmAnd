@@ -28,6 +28,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MotionEventCompat;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
@@ -1953,20 +1954,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean onGenericMotionEvent(MotionEvent event) {
-		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
-				event.getAction() == MotionEvent.ACTION_SCROLL &&
-				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0) {
-			RotatedTileBox tb = getCurrentRotatedTileBox();
-			LatLon latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, event.getX(), event.getY());
-			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
-			int endZoom = normalizeZoomWithLimits(getZoom() + zoomDir);
-			float zoomFloatPart = getZoomFloatPart();
-			if (hasMapRenderer()) {
-				getAnimatedDraggingThread().startZooming(endZoom, zoomFloatPart, latlon, true);
-			} else {
-				getAnimatedDraggingThread().startMoving(latlon.getLatitude(), latlon.getLongitude(), endZoom, zoomFloatPart);
+		if (event.getAction() == MotionEvent.ACTION_SCROLL) {
+			float scroll = event.getAxisValue(MotionEventCompat.AXIS_SCROLL);
+			if (scroll != 0.f) {
+				changeZoomManually(scroll < 0 ? -1 : 1);
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
