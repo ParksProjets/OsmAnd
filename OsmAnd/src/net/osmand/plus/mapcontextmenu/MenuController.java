@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
-import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
@@ -224,8 +223,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new TransportRouteController(mapActivity, pointDescription, (TransportStopRoute) object);
 			} else if (object instanceof TransportStop) {
 				menuController = new TransportStopController(mapActivity, pointDescription, (TransportStop) object);
-			} else if (object instanceof AidlMapPointWrapper) {
-				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AidlMapPointWrapper) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);

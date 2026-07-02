@@ -23,8 +23,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
-import net.osmand.aidl.AidlMapWidgetWrapper;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
@@ -143,13 +141,10 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		}
 
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList(appMode);
-		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
 			Collator collator = OsmAndCollator.primaryCollator();
 			widgets.sort((indexItem, indexItem2) -> collator.compare(app.getString(indexItem.titleId), app.getString(indexItem2.titleId)));
 			inflateWidgetsList(widgets);
-		} else if (aidlWidgetData != null) {
-			inflateAidlWidget(aidlWidgetData);
 		}
 
 		String secondaryDesc = widgetsDataHolder.getSecondaryDescription();
@@ -198,21 +193,6 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		container.addView(spaceView);
 	}
 
-	private void inflateAidlWidget(@NonNull AidlMapWidgetWrapper aidlWidgetData) {
-		ViewGroup container = view.findViewById(R.id.widgets_container);
-		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
-
-		View view = inflater.inflate(R.layout.add_widget_item, container, false);
-		String widgetId = getAidlWidgetId(aidlWidgetData);
-		String title = aidlWidgetData.getMenuTitle();
-		String iconName = aidlWidgetData.getMenuIconName();
-		int iconId = AndroidUtils.getDrawableId(app, iconName);
-		Drawable icon = iconId != 0 ? getPaintedIcon(iconId, appMode.getProfileColor(nightMode)) : null;
-		setupWidgetItemView(view, widgetId, title, null, icon, false);
-
-		container.addView(view);
-	}
-
 	private void setupWidgetItemView(@NonNull View view,
 	                                 @NonNull String widgetId,
 	                                 @NonNull String title,
@@ -237,18 +217,10 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		});
 	}
 
-	@NonNull
-	private String getAidlWidgetId(@NonNull AidlMapWidgetWrapper aidlWidgetData) {
-		return OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
-	}
-
 	private void selectWidgetByDefault() {
 		WidgetType widget = widgetsDataHolder.getMainWidget();
-		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widget != null) {
 			updateWidgetSelection(widget.getDefaultOrder(), widget.id, widget.isPurchased(app));
-		} else if (aidlWidgetData != null) {
-			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
 		}
 	}
 

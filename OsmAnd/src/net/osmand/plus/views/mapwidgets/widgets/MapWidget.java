@@ -139,10 +139,6 @@ public abstract class MapWidget {
 		return widgetType;
 	}
 
-	public boolean isExternal() {
-		return getWidgetType() == WidgetType.AIDL_WIDGET;
-	}
-
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		updateInfo(getView(), drawSettings);
 	}

@@ -74,8 +74,6 @@ public class SearchWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.View
 				viewHolder.bind(selectedAppMode, listener, (WidgetType) item, nightMode, showDivider);
 			} else if (item instanceof GroupItem) {
 				viewHolder.bind(selectedAppMode, listener, (GroupItem) item, nightMode, showDivider);
-			} else if (item instanceof MapWidgetInfo) {
-				viewHolder.bind(selectedAppMode, iconsHelper, listener, (MapWidgetInfo) item, nightMode, showDivider);
 			}
 		}
 	}

@@ -23,8 +23,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.aidl.AidlMapWidgetWrapper;
-import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
@@ -284,13 +282,6 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		WidgetType widget = getWidget();
 
 		String title = app.getString(widget.titleId);
-		if (widgetInfo.isExternal() && !Algorithms.isEmpty(widgetInfo.getExternalProviderPackage())) {
-			ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(widgetInfo.getExternalProviderPackage());
-			if (connectedApp != null) {
-				AidlMapWidgetWrapper aidlMapWidgetWrapper = connectedApp.getWidgetData(widgetId);
-				title = aidlMapWidgetWrapper.getMenuTitle();
-			}
-		}
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getContentIcon(addNewWidgetMode ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app)));
@@ -314,20 +305,13 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		WidgetType widgetType = widgetInfo.getWidgetType();
 
 		TextView tvDesc = view.findViewById(R.id.widget_description);
-		String externalProviderPackage = widgetInfo.getExternalProviderPackage();
-		if (widgetInfo.isExternal() && externalProviderPackage != null) {
-			ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(externalProviderPackage);
-			if (connectedApp != null) {
-				tvDesc.setText(connectedApp.getName());
-			}
-		} else {
-			tvDesc.setText(widgetType.descId);
-			MapActivity mapActivity = getMapActivity();
-			if (!widgetType.isPurchased(app) && mapActivity != null) {
-				AndroidUiHelper.updateVisibility(promoBannerContainer, true);
-				WidgetPromoBanner banner = new WidgetPromoBanner(mapActivity, widgetType, false);
-				promoBanner.addView(banner.build());
-			}
+		tvDesc.setText(widgetType.descId);
+
+		MapActivity mapActivity = getMapActivity();
+		if (!widgetType.isPurchased(app) && mapActivity != null) {
+			AndroidUiHelper.updateVisibility(promoBannerContainer, true);
+			WidgetPromoBanner banner = new WidgetPromoBanner(mapActivity, widgetType, false);
+			promoBanner.addView(banner.build());
 		}
 	}
 

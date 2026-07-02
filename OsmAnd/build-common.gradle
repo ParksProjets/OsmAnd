@@ -45,7 +45,6 @@ android {
 			manifest.srcFile "AndroidManifest.xml"
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
-			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
 			res.srcDirs = ["res", layout.buildDirectory.dir("generated/osmand/res")]
@@ -375,7 +374,6 @@ tasks.register('appStart', Exec) {
 
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
-	implementation project(':OsmAnd-api')
 
 	implementation project(':OsmAnd-shared')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

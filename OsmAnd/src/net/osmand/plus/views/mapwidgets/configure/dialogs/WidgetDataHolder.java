@@ -2,8 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.os.Bundle;
 
-import net.osmand.aidl.AidlMapWidgetWrapper;
-import net.osmand.aidl.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -21,8 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import static net.osmand.aidl.OsmandAidlApi.WIDGET_ID_PREFIX;
-
 public class WidgetDataHolder {
 
 	public static final String KEY_WIDGETS_PANEL_ID = "widgets_panel_id";
@@ -38,10 +34,8 @@ public class WidgetDataHolder {
 	private WidgetGroup widgetGroup;
 	private WidgetType widgetType;
 
-	private ConnectedApp connectedApp;
 	private String aidlWidgetId;
 	private String externalProviderPackage;
-	private AidlMapWidgetWrapper aidlWidgetData;
 
 	public WidgetDataHolder(@NonNull OsmandApplication app, @NonNull Bundle bundle) {
 		this.app = app;
@@ -49,14 +43,6 @@ public class WidgetDataHolder {
 		widgetsPanel = WidgetsPanel.valueOf(bundle.getString(KEY_WIDGETS_PANEL_ID));
 		if (bundle.containsKey(KEY_GROUP_NAME)) {
 			widgetGroup = WidgetGroup.valueOf(bundle.getString(KEY_GROUP_NAME));
-		} else if (bundle.containsKey(KEY_EXTERNAL_PROVIDER_PACKAGE)) {
-			aidlWidgetId = bundle.getString(KEY_EXTERNAL_WIDGET_ID);
-			externalProviderPackage = bundle.getString(KEY_EXTERNAL_PROVIDER_PACKAGE);
-			connectedApp = app.getAidlApi().getConnectedApp(externalProviderPackage);
-			if (connectedApp != null) {
-				String sourceId = aidlWidgetId.replaceFirst(WIDGET_ID_PREFIX, "");
-				aidlWidgetData = connectedApp.getWidgets().get(sourceId);
-			}
 		} else {
 			widgetType = WidgetType.valueOf(bundle.getString(KEY_WIDGET_TYPE));
 		}
@@ -83,8 +69,6 @@ public class WidgetDataHolder {
 			return getString(widgetGroup.titleId);
 		} else if (widgetType != null) {
 			return getString(widgetType.titleId);
-		} else if (aidlWidgetData != null) {
-			return aidlWidgetData.getMenuTitle();
 		}
 		return "";
 	}
@@ -102,9 +86,6 @@ public class WidgetDataHolder {
 			return widgetGroup.getIconId(nightMode);
 		} else if (widgetType != null) {
 			return widgetType.getIconId(nightMode);
-		} else if (aidlWidgetData != null) {
-			String iconName = aidlWidgetData.getMenuIconName();
-			return AndroidUtils.getDrawableId(app, iconName);
 		}
 		return 0;
 	}
@@ -115,8 +96,6 @@ public class WidgetDataHolder {
 			return getString(widgetGroup.descId);
 		} else if (widgetType != null && widgetType.descId != 0) {
 			return getString(widgetType.descId);
-		} else if (connectedApp != null) {
-			return connectedApp.getName();
 		}
 		return null;
 	}
@@ -149,11 +128,6 @@ public class WidgetDataHolder {
 			return widgetType;
 		}
 		return null;
-	}
-
-	@Nullable
-	public AidlMapWidgetWrapper getAidlWidgetData() {
-		return aidlWidgetData;
 	}
 
 	@Nullable

@@ -39,7 +39,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndTaskManager;
@@ -323,7 +322,7 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		boolean authorized = extras != null && OsmandAidlApi.hasAuthToken(app, extras);
+		boolean authorized = extras != null;
 		if (extras != null && authorized && CollectionUtils.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);

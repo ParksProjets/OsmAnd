@@ -1155,20 +1155,6 @@
 			android:stopWithTask="false">
 		</service>
 
-		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
-			<intent-filter>
-				<action android:name="net.osmand.aidl.OsmandAidlService"/>
-				<category android:name="android.intent.category.DEFAULT"/>
-			</intent-filter>
-		</service>
-
-		<service android:name="net.osmand.aidl.OsmandAidlServiceV2" android:exported="true" >
-			<intent-filter>
-				<action android:name="net.osmand.aidl.OsmandAidlServiceV2"/>
-				<category android:name="android.intent.category.DEFAULT"/>
-			</intent-filter>
-		</service>
-
 		<service
 			android:name="net.osmand.plus.download.DownloadService"
 			android:label="@string/process_downloading_service"

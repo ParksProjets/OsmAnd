@@ -23,7 +23,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
@@ -319,7 +318,6 @@ public class AppInitializer implements IProgress {
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app), GpxSelectionHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
-		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
 		updateRegionVars();

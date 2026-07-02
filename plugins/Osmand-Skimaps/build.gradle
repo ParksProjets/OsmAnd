@@ -37,7 +37,6 @@ android {
 			manifest.srcFile "AndroidManifest.xml"
 			jni.srcDirs = []
 			jniLibs.srcDirs = []
-			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
 			res.srcDirs = ["res"]
@@ -54,7 +53,6 @@ android {
 		}
 	}
 	buildFeatures {
-		aidl true
 	}
 }
 

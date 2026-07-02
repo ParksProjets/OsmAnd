@@ -33,7 +33,6 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -149,7 +148,6 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmAndAppCustomization appCustomization;
 	NavigationService navigationService;
 	DownloadService downloadService;
-	OsmandAidlApi aidlApi;
 	OsmAndDiagnosticThread diagnosticThread;
 
 	NavigationCarAppService navigationCarAppService;
@@ -815,10 +813,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setDownloadService(@Nullable DownloadService downloadService) {
 		this.downloadService = downloadService;
-	}
-
-	public OsmandAidlApi getAidlApi() {
-		return aidlApi;
 	}
 
 	public void stopNavigation() {

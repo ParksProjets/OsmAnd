@@ -66,18 +66,6 @@ public class SearchWidgetViewHolder extends RecyclerView.ViewHolder {
 		itemView.setOnClickListener(view -> listener.groupSelected(groupItem.group()));
 	}
 
-	public void bind(@NonNull ApplicationMode selectedAppMode, @NonNull WidgetIconsHelper iconsHelper, @NonNull SearchWidgetListener listener, @NonNull MapWidgetInfo widgetInfo, boolean nightMode, boolean showDivider) {
-		title.setText(widgetInfo.getTitle(app));
-		AndroidUiHelper.updateVisibility(count, false);
-		AndroidUiHelper.updateVisibility(proIcon, false);
-		divider.setVisibility(showDivider ? View.VISIBLE : View.INVISIBLE);
-
-		iconsHelper.updateWidgetIcon(icon, widgetInfo);
-
-		setupSelectableBackground(selectedAppMode, nightMode);
-		itemView.setOnClickListener(view -> listener.externalWidgetSelected(widgetInfo));
-	}
-
 	private void setupSelectableBackground(@NonNull ApplicationMode selectedAppMode, boolean nightMode) {
 		int color = selectedAppMode.getProfileColor(nightMode);
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);

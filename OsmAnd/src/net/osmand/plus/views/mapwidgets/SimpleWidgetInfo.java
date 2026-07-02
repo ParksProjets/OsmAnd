@@ -11,8 +11,6 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class SimpleWidgetInfo extends MapWidgetInfo {
 
-	private String externalProviderPackage;
-
 	public SimpleWidgetInfo(@NonNull String key,
 							@NonNull SimpleWidget widget,
 							@DrawableRes int daySettingsIconId,
@@ -48,14 +46,5 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 			WidgetType.findWidgetPanel(key, settings, null, layoutMode);
 		}
 		return widgetPanel;
-	}
-
-	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
-		this.externalProviderPackage = externalProviderPackage;
-	}
-
-	@Nullable
-	public String getExternalProviderPackage() {
-		return externalProviderPackage;
 	}
 }

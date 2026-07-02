@@ -275,11 +275,9 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 
 		if (hasAvailableWidgets) {
 			List<WidgetType> allWidgetTypes;
-			List<MapWidgetInfo> externalWidgets;
 			Map<WidgetGroup, List<WidgetType>> groupedWidgets = new HashMap<>();
 
 			allWidgetTypes = listDefaultWidgets(availableWidgets);
-			externalWidgets = getExternalWidgets(availableWidgets);
 
 
 			for (WidgetType widgetType : allWidgetTypes) {
@@ -288,10 +286,8 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 				}
 			}
 			widgetItems.clear();
-			widgetItems.addAll(externalWidgets);
 			allWidgetItems.clear();
 			allWidgetItems.addAll(allWidgetTypes);
-			allWidgetItems.addAll(externalWidgets);
 
 			for (Map.Entry<WidgetGroup, List<WidgetType>> entry : groupedWidgets.entrySet()) {
 				GroupItem groupItem = new GroupItem(entry.getKey(), entry.getValue().size());
@@ -330,17 +326,6 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 			}
 			return 0;
 		});
-	}
-
-	@NonNull
-	private List<MapWidgetInfo> getExternalWidgets(Set<MapWidgetInfo> availableWidgets) {
-		List<MapWidgetInfo> externalWidgets = new ArrayList<>();
-		for (MapWidgetInfo widgetInfo : availableWidgets) {
-			if (widgetInfo.isExternal()) {
-				externalWidgets.add(widgetInfo);
-			}
-		}
-		return externalWidgets;
 	}
 
 	private void setWidgetList(boolean allWidgets) {
@@ -424,20 +409,6 @@ public class SearchWidgetsFragment extends BaseFullScreenFragment implements Sea
 	public void onDestroy() {
 		super.onDestroy();
 		getParentFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
-	}
-
-	@Override
-	public void externalWidgetSelected(@NonNull MapWidgetInfo widgetInfo) {
-
-		FragmentActivity activity = getActivity();
-		Fragment target = getTargetFragment();
-
-		String externalProviderPackage = widgetInfo.getExternalProviderPackage();
-		if (activity != null && !Algorithms.isEmpty(externalProviderPackage) && target != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			AddWidgetFragment.showExternalWidgetDialog(fragmentManager, target,
-					selectedAppMode, selectedPanel, widgetInfo.key, externalProviderPackage, null);
-		}
 	}
 
 	@Override

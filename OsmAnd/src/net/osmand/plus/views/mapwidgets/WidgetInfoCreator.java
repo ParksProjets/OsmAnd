@@ -95,11 +95,7 @@ public class WidgetInfoCreator {
 	@Nullable
 	public MapWidgetInfo askCreateWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
 	                                         @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
-		if (widgetType == WidgetType.AIDL_WIDGET) {
-			return app.getAidlApi().askCreateExternalWidgetInfo(this, widget, widgetId, panel);
-		} else {
-			return createCustomWidgetInfo(widgetId, widget, widgetType, panel);
-		}
+		return createCustomWidgetInfo(widgetId, widget, widgetType, panel);
 	}
 
 	@NonNull

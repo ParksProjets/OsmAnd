@@ -129,10 +129,6 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 		return widget.getWidgetType();
 	}
 
-	public boolean isExternal() {
-		return widget.isExternal();
-	}
-
 	@NonNull
 	public String getTitle(@NonNull Context ctx) {
 		String message = getMessage();
@@ -152,14 +148,6 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	@StringRes
 	public int getMessageId() {
 		return messageId;
-	}
-
-	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
-	}
-
-	@Nullable
-	public String getExternalProviderPackage() {
-		return null;
 	}
 
 	@NonNull

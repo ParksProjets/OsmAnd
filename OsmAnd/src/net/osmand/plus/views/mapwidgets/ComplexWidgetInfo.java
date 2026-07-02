@@ -13,8 +13,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class ComplexWidgetInfo extends MapWidgetInfo {
 
-	private String externalProviderPackage;
-
 	public ComplexWidgetInfo(@NonNull String key,
 	                         @NonNull MapWidget widget,
 	                         @DrawableRes int daySettingsIconId,
@@ -52,14 +50,5 @@ public class ComplexWidgetInfo extends MapWidgetInfo {
 			WidgetType.findWidgetPanel(key, settings, null, layoutMode);
 		}
 		return widgetPanel;
-	}
-
-	public void setExternalProviderPackage(@NonNull String externalProviderPackage) {
-		this.externalProviderPackage = externalProviderPackage;
-	}
-
-	@Nullable
-	public String getExternalProviderPackage() {
-		return externalProviderPackage;
 	}
 }
